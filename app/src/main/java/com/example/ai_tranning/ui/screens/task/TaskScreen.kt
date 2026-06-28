@@ -41,6 +41,16 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Task create/edit screen with fields for title, description, status, priority, and an optional due
+ * date (via a date picker dialog).
+ *
+ * The title bar and primary button adapt to create vs. edit mode. When the backing
+ * [TaskViewModel] reports the task as saved, [onNavigateBack] is invoked automatically.
+ *
+ * @param onNavigateBack called when the back icon is tapped or after a successful save.
+ * @param viewModel the backing [TaskViewModel]; defaults to a Hilt-provided instance.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskScreen(

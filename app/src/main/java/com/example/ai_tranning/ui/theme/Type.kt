@@ -6,6 +6,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+/** App-wide Material 3 [Typography] scale; only `bodyLarge` is customized, the rest use defaults. */
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(

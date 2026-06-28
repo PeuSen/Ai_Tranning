@@ -46,6 +46,17 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Project-details screen showing a project's tasks with status and priority filter chips.
+ *
+ * Renders a loading spinner, an empty-state message, or the task list, plus a FAB for adding tasks.
+ * State is provided by [ProjectViewModel].
+ *
+ * @param onNavigateBack called when the back navigation icon is tapped.
+ * @param onAddTask called with the project id when the add-task FAB is tapped.
+ * @param onEditTask called with the project id and task id when a task's edit action is tapped.
+ * @param viewModel the backing [ProjectViewModel]; defaults to a Hilt-provided instance.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProjectScreen(
@@ -151,6 +162,15 @@ fun ProjectScreen(
     }
 }
 
+/**
+ * Card showing a single task's completion checkbox, title, priority badge, and optional due date,
+ * with edit and delete actions.
+ *
+ * @param task the task to display.
+ * @param onToggle called when the completion checkbox is tapped.
+ * @param onEdit called when the edit action is tapped.
+ * @param onDelete called when the delete action is tapped.
+ */
 @Composable
 private fun TaskCard(
     task: TaskEntity,

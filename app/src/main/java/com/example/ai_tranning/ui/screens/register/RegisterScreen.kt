@@ -27,6 +27,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ai_tranning.viewmodel.RegisterViewModel
 
+/**
+ * Registration screen composable.
+ *
+ * Renders the username/email/password/confirm form driven by [RegisterViewModel]'s `uiState`. When
+ * registration succeeds, [onRegisterSuccess] is invoked once via a [LaunchedEffect] keyed on
+ * `isRegistered` (the new user is already auto-logged-in by the view model).
+ *
+ * @param onRegisterSuccess called when registration succeeds (navigate to the dashboard).
+ * @param onNavigateToLogin called when the user taps the "Login" link.
+ * @param viewModel the screen's [RegisterViewModel]; defaults to a Hilt-provided instance.
+ */
 @Composable
 fun RegisterScreen(
     onRegisterSuccess: () -> Unit,

@@ -11,6 +11,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+/**
+ * Small colored pill that labels a task's priority.
+ *
+ * Maps `"HIGH"`/`"MEDIUM"`/`"LOW"` to distinct background/text color pairs and falls back to theme
+ * surface colors for any other value.
+ *
+ * @param priority the priority string to display (`"LOW"`, `"MEDIUM"`, or `"HIGH"`).
+ */
 @Composable
 fun PriorityBadge(priority: String) {
     val (backgroundColor, textColor) = when (priority) {

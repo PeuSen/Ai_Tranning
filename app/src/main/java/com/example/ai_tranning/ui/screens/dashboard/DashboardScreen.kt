@@ -1,3 +1,4 @@
+
 package com.example.ai_tranning.ui.screens.dashboard
 
 import androidx.compose.foundation.clickable
@@ -42,6 +43,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ai_tranning.viewmodel.DashboardViewModel
 import com.example.ai_tranning.viewmodel.ProjectWithCount
 
+/**
+ * Dashboard screen listing the logged-in user's projects with task-progress indicators.
+ *
+ * Shows a loading spinner, an empty-state message, or the project list, plus a FAB and dialog for
+ * creating/editing projects. State is provided by [DashboardViewModel].
+ *
+ * @param onProjectClick called with a project id when a project card is tapped.
+ * @param onLoggedOut called after logout completes, to navigate away from the dashboard.
+ * @param viewModel the backing [DashboardViewModel]; defaults to a Hilt-provided instance.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
@@ -144,6 +155,15 @@ fun DashboardScreen(
     }
 }
 
+/**
+ * Card showing a single project's name, description, completion count, and progress bar, with edit
+ * and delete actions.
+ *
+ * @param item the project paired with its task-progress counts.
+ * @param onClick called when the card body is tapped.
+ * @param onEdit called when the edit action is tapped.
+ * @param onDelete called when the delete action is tapped.
+ */
 @Composable
 private fun ProjectCard(
     item: ProjectWithCount,

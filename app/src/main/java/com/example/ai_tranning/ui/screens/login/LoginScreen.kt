@@ -26,6 +26,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ai_tranning.viewmodel.LoginViewModel
 
+/**
+ * Login screen composable.
+ *
+ * Renders the username/password form, a loading indicator, and any error message, all driven by
+ * [LoginViewModel]'s `uiState`. When the view model reports a successful login, [onLoginSuccess] is
+ * invoked once via a [LaunchedEffect] keyed on `isLoggedIn`.
+ *
+ * @param onLoginSuccess called when authentication succeeds (navigate to the dashboard).
+ * @param onNavigateToRegister called when the user taps the "Register" link.
+ * @param viewModel the screen's [LoginViewModel]; defaults to a Hilt-provided instance.
+ */
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit,

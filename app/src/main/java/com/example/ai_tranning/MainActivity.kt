@@ -18,9 +18,18 @@ import com.example.ai_tranning.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * Single-activity host for the entire Compose UI.
+ *
+ * As an `@AndroidEntryPoint` it can have dependencies injected by Hilt — here the [SessionManager],
+ * which it reads on launch to choose the start destination: the dashboard if a session exists,
+ * otherwise the login screen. The first emission of `loggedInUserId` gates rendering so navigation
+ * starts from the correct place without a visible flicker.
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    /** Injected session store; used to decide the navigation start destination. */
     @Inject
     lateinit var sessionManager: SessionManager
 

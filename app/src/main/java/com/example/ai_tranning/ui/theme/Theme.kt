@@ -33,6 +33,16 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+/**
+ * App-wide Material 3 theme wrapper.
+ *
+ * Selects a color scheme based on the system dark-mode setting and, on Android 12+, optional dynamic
+ * (wallpaper-based) colors, then applies it along with the app [Typography] to [content].
+ *
+ * @param darkTheme whether to use the dark color scheme; defaults to the system setting.
+ * @param dynamicColor whether to use dynamic colors on Android 12+; defaults to `true`.
+ * @param content the composable content to theme.
+ */
 @Composable
 fun Ai_TranningTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
