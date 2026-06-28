@@ -4,12 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.ai_tranning.ui.navigation.NavGraph
 import com.example.ai_tranning.ui.navigation.Routes
@@ -38,25 +42,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Ai_TranningTheme {
-                val loggedInUserId by sessionManager.loggedInUserId.collectAsState(initial = null)
-                var isReady by remember { mutableStateOf(false) }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val loggedInUserId by sessionManager.loggedInUserId.collectAsState(initial = null)
+                    var isReady by remember { mutableStateOf(false) }
 
-                LaunchedEffect(loggedInUserId) {
-                    // Wait for first emission to determine start destination
-                    isReady = true
-                }
-
-                if (isReady) {
-                    val startDestination = if (loggedInUserId != null) {
-                        Routes.DASHBOARD
-                    } else {
-                        Routes.LOGIN
+                    LaunchedEffect(loggedInUserId) {
+                        // Wait for first emission to determine start destination
+                        isReady = true
                     }
-                    val navController = rememberNavController()
-                    NavGraph(
-                        navController = navController,
-                        startDestination = startDestination
-                    )
+
+                    if (isReady) {
+                        val startDestination = if (loggedInUserId != null) {
+                            Routes.DASHBOARD
+                        } else {
+                            Routes.LOGIN
+                        }
+                        val navController = rememberNavController()
+                        NavGraph(
+                            navController = navController,
+                            startDestination = startDestination
+                        )
+                    }
                 }
             }
         }

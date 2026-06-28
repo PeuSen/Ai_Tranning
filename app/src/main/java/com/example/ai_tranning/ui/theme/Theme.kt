@@ -17,20 +17,25 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = Pink80
 )
 
+/**
+ * TaskCo light theme implementing the app's design system: a `blue-600` primary on a `gray-50`
+ * background, white card surfaces, and `red-600` for errors/destructive actions. Text colors map to
+ * `gray-900` (titles, `onSurface`) and `gray-600` (`onSurfaceVariant`, body).
+ */
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = BluePrimary,
+    onPrimary = SurfaceWhite,
+    secondary = BluePrimary,
+    onSecondary = SurfaceWhite,
+    tertiary = BluePrimary,
+    background = Gray50,
+    onBackground = Gray900,
+    surface = SurfaceWhite,
+    onSurface = Gray900,
+    surfaceVariant = SurfaceWhite,
+    onSurfaceVariant = Gray600,
+    error = DangerRed,
+    onError = SurfaceWhite
 )
 
 /**
@@ -46,8 +51,9 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun Ai_TranningTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    // Dynamic color is disabled by default so the TaskCo brand palette (blue/gray-50) is used
+    // consistently; it would otherwise be overridden by wallpaper colors on Android 12+.
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

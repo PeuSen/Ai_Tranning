@@ -41,6 +41,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ai_tranning.data.local.entity.TaskEntity
 import com.example.ai_tranning.ui.components.PriorityBadge
+import com.example.ai_tranning.ui.components.StatusBadge
+import com.example.ai_tranning.ui.theme.DangerRed
 import com.example.ai_tranning.viewmodel.ProjectViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -205,6 +207,7 @@ private fun TaskCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    StatusBadge(status = task.status)
                     PriorityBadge(priority = task.priority)
                     task.dueDate?.let { date ->
                         Text(
@@ -220,7 +223,7 @@ private fun TaskCard(
                 Icon(Icons.Default.Edit, contentDescription = "Edit")
             }
             IconButton(onClick = onDelete) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete")
+                Icon(Icons.Default.Delete, contentDescription = "Delete", tint = DangerRed)
             }
         }
     }

@@ -1,6 +1,7 @@
 
 package com.example.ai_tranning.ui.screens.dashboard
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -38,8 +41,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ai_tranning.ui.theme.DangerRed
 import com.example.ai_tranning.viewmodel.DashboardViewModel
 import com.example.ai_tranning.viewmodel.ProjectWithCount
 
@@ -183,16 +189,20 @@ private fun ProjectCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                ProjectColorDot(colorHex = item.project.color)
                 Text(
                     text = item.project.name,
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.weight(1f)
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
                 )
                 IconButton(onClick = onEdit) {
                     Icon(Icons.Default.Edit, contentDescription = "Edit")
                 }
                 IconButton(onClick = onDelete) {
-                    Icon(Icons.Default.Delete, contentDescription = "Delete")
+                    Icon(Icons.Default.Delete, contentDescription = "Delete", tint = DangerRed)
                 }
             }
 
@@ -218,4 +228,24 @@ private fun ProjectCard(
             }
         }
     }
+}
+
+/**
+ * Small circular swatch showing a project's [colorHex] (e.g. `"#FF6200EE"`). Renders nothing when
+ * the color is `null` or cannot be parsed, so an uncolored project simply has no dot.
+ *
+ * @param colorHex the project's stored color string, or `null`.
+ */
+@Composable
+private fun ProjectColorDot(colorHex: String?) {
+    val parsed = colorHex?.let { hex ->
+        runCatching { Color(android.graphics.Color.parseColor(hex)) }.getOrNull()
+    } ?: return
+
+    Box(
+        modifier = Modifier
+            .size(12.dp)
+            .clip(CircleShape)
+            .background(parsed)
+    )
 }
